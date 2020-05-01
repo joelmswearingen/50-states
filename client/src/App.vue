@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header></Header>
-    <!-- TO DO - add content -->
+    <RouterView></RouterView> <!-- this component is determined by VueRouter, reviewing browser URL and loading corresponding component here. Mappings in router/index.js > routes -->
     <Footer></Footer>
   </div>
 </template>
