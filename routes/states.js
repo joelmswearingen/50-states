@@ -11,7 +11,23 @@ router.get('/states', function(req, res, next) {
     .then( states => {
         return res.json(states)  // returns a json response with all states
     })
-    .catch( err => next(err) )  // error handling, as needed
+    .catch( err => next(err) )  // unexpected error handling, as needed, pass to error handler
+})
+
+// this route appends 'state visited' data to the corresponding state
+router.patch('/state/:name', function(req, res, next){
+    States.update({ visited: req.body.visited }, {where: {  // Vue.app send the visited boolean to...
+            name: req.params.name  // the database using params
+        }
+    })
+    .then( rows => {
+        if (rows) {  // modify the row
+            return res.send('ok')
+        } else {
+            return res.status(404).send()  // if no rows are modified, return 404 error
+        }
+    })
+    .catch( err => next(err) )  // unexpected error handling, as needed, pass to error handler
 })
 
 module.exports = router  // exports router object so that other files can access responses
