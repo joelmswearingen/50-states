@@ -5,6 +5,12 @@
             <input id="visited" class="m-2" type="checkbox"
             v-model="stateVisited" v-on:change="$emit('isVisited', stateName, stateVisited)">
         </p>
+
+        <p>
+            <router-link v-bind:to="{ name: 'detail', params: { state: stateName } }">
+                <img class="map-icon" src="@/assets/signs.png">
+            </router-link>
+        </p>
     </div>
 </template>
 
@@ -29,5 +35,10 @@ export default {
         width: 10em;
         border: 1px #EEE solid;
         background-color: floralwhite;
+    }
+
+    .map-icon {
+        width: 2em;
+        height: 2em;
     }
 </style>

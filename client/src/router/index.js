@@ -2,6 +2,7 @@ import Router from 'vue-router' // import and allow Router from vue-router insta
 
 import StateList from '@/components/StateList' // import and allow StateList component to be used
 import About from '@/components/About'  // import and allow About component to be used
+import StateDetail from '@/components/StateDetail'
 
 export default new Router({ // this sets the homepage of the app
     routes: [
@@ -12,6 +13,11 @@ export default new Router({ // this sets the homepage of the app
         {
             path: '/about',  // associates the url path '/about' with About component
             component: About
+        },
+        {
+            path: '/detail/:state',  // associates the url path '/detail/"unique state name"' with StateDetail component
+            name: 'detail',
+            component: StateDetail
         }
     ]
 })

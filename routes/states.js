@@ -7,11 +7,24 @@ let router = express.Router()  // this call creates the object which understands
 
 // this route fetches data from api/states
 router.get('/states', function(req, res, next) {
-    States.findAll({order: ['name']})  // finds all states in the db
+    States.findAll({ order: ['name'] })  // finds all states in the db
     .then( states => {
         return res.json(states)  // returns a json response with all states
     })
     .catch( err => next(err) )  // unexpected error handling, as needed, pass to error handler
+})
+
+// this route fetches data from api/states
+router.get('/states/:name', function(req, res, next) {
+    States.findOne({ where: { name: req.params.name } })  // finds a specific state in the db
+        .then(state => {
+            if (state) {
+                return res.json(state)  // returns a json response with found state
+            } else {
+                return res.status(404).send()  // if state is not found, return 404 error
+            }
+        })
+        .catch( err => next(err) )    // unexpected error handling, as needed, pass to error handler
 })
 
 // this route appends 'state visited' data to the corresponding state
